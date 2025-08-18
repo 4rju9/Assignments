@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/visitFragment">
+
+    <fragment
+        android:id="@+id/geofenceFragment"
+        android:name="app.netlify.dev4rju9.geologger.presentation.geofence.GeofenceFragment"
+        android:label="fragment_geofence"
+        tools:layout="@layout/fragment_geofence" />
+    <fragment
+        android:id="@+id/visitFragment"
+        android:name="app.netlify.dev4rju9.geologger.presentation.visit.VisitFragment"
+        android:label="fragment_visit"
+        tools:layout="@layout/fragment_visit" >
+        <action
+            android:id="@+id/action_visitFragment_to_geofenceFragment"
+            app:destination="@id/geofenceFragment" />
+    </fragment>
+
+</navigation>
