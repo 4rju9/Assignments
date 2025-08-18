@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Assignment App</string>
+    <string name="tvDescription">Description</string>
+    <string name="tvEmailLabel">Email</string>
+    <string name="emailId">Email Id</string>
+    <string name="password">Password</string>
+    <string name="passwordConfirm">Confirm Password</string>
+    <string name="tvHello">Hello.</string>
+    <string name="signUp">Let\'s get started!</string>
+    <string name="skipButton">Skip</string>
+    <string name="alreadyCreateAccountTxt">Already have an account?</string>
+    <string name="loginTxt">Login</string>
+    <string name="signIn">Welcome Back!</string>
+    <string name="dontHaveAccount">Don\'t have an account?</string>
+    <string name="createButtonTxt">Create New Account</string>
+    <string name="tvMainPlainHello">Hello,</string>
+    <string name="textHaveNiceDay">Have a nice day!</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+
+    <string name="workshop">Workshop</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="apply">Apply</string>
+    <string name="already_applied">Already Applied</string>
+    <string name="logout">Log Out</string>
+
+</resources>

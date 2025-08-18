@@ -1,0 +1,78 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.kotlin)
+    id "kotlin-kapt"
+    alias(libs.plugins.navigation.safe.args)
+    alias(libs.plugins.android.dagger.hilt)
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+}
+
+android {
+    namespace 'app.netlify.dev4rju9.geologger'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "app.netlify.dev4rju9.geologger"
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+
+    // Room Database
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler) // For annotation processing
+
+    // Geofencing
+    implementation(libs.play.services.location)
+    implementation(libs.play.services.maps)
+
+    // Lifecycle (ViewModel and LiveData)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+
+    // Navigation Components
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+
+    // Dependency Injection (Hilt)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+    // Coroutines
+    implementation(libs.kotlin.coroutines)
+
+}
