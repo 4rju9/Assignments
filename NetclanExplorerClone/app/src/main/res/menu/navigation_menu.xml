@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_profile"
+            android:title="@string/my_profile"
+            android:icon="@drawable/profile_icon"/>
+
+        <item
+            android:id="@+id/nav_network"
+            android:title="@string/my_network"
+            android:icon="@drawable/network_nav_icon"/>
+
+        <item
+            android:id="@+id/nav_business"
+            android:title="@string/switch_business"
+            android:icon="@drawable/business_icon"/>
+
+        <item
+            android:id="@+id/nav_merchant"
+            android:title="@string/switch_merchant"
+            android:icon="@drawable/merchant_icon"/>
+
+        <item
+            android:id="@+id/nav_dating"
+            android:title="@string/dating"
+            android:icon="@drawable/dating_icon"/>
+
+        <item
+            android:id="@+id/nav_matrimony"
+            android:title="@string/matrimony"
+            android:icon="@drawable/matrimony_icon"/>
+
+        <item
+            android:id="@+id/nav_buySellRent"
+            android:title="@string/buy_sell_rent"
+            android:icon="@drawable/buy_sell_rent_icon"/>
+
+        <item
+            android:id="@+id/nav_jobs"
+            android:title="@string/jobs"
+            android:icon="@drawable/jobs_icon"/>
+
+        <item
+            android:id="@+id/nav_businessCards"
+            android:title="@string/business_cards"
+            android:icon="@drawable/business_cards_icon"/>
+
+        <item
+            android:id="@+id/nav_netclanGroups"
+            android:title="@string/netclan_groups"
+            android:icon="@drawable/hashtag_icon"/>
+
+        <item
+            android:id="@+id/nav_notes"
+            android:title="@string/notes"
+            android:icon="@drawable/notes_icon"/>
+
+        <item
+            android:id="@+id/nav_liveLocation"
+            android:title="@string/live_locations"
+            android:icon="@drawable/location_icon"/>
+
+    </group>
+
+</menu>
+

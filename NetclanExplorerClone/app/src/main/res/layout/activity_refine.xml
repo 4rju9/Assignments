@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RefineActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/refine_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/netclan_dark"
+        app:title="@string/tv_refine"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/back_icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/tv_select_availability"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:textColor="@color/netclan"/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/refine_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/spinner_drop_down"
+        android:dropDownVerticalOffset="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/tv_select_status"
+        android:textColor="@color/netclan"
+        android:textStyle="bold"
+        android:textSize="13sp"/>
+
+    <EditText
+        android:id="@+id/refine_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/tv_initial_status"
+        android:textColor="@color/netclan"
+        android:textSize="13sp"
+        android:maxLength="250"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="28dp"
+        android:background="@drawable/stroke"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layout_marginTop="3dp"
+        android:layout_marginHorizontal="25dp">
+
+        <TextView
+            android:id="@+id/refine_character_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/netclan"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/slash"
+            android:textColor="@color/netclan"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_two_fifty"
+            android:textColor="@color/netclan"
+            android:textSize="13sp"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/tv_select_distance"
+        android:textColor="@color/netclan"
+        android:textStyle="bold"
+        android:textSize="13sp"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"
+        android:value="50"
+        android:stepSize="1"
+        android:valueFrom="0"
+        android:valueTo="100"
+        app:labelBehavior="visible"
+        app:labelStyle="@style/customLabel"
+        android:layout_marginHorizontal="10dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/from_distance"
+            android:textColor="@color/netclan"
+            android:textSize="13sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/to_distance"
+            android:textColor="@color/netclan"
+            android:textSize="13sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/tv_select_purpose"
+        android:textColor="@color/netclan"
+        android:textStyle="bold"
+        android:textSize="13sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="22dp">
+
+        <TextView
+            android:id="@+id/purpose_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coffee"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:paddingStart="7dp"
+            android:paddingEnd="12dp"
+            android:paddingVertical="4dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/round_filled"/>
+
+        <TextView
+            android:id="@+id/purpose_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Business"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:paddingStart="7dp"
+            android:paddingEnd="12dp"
+            android:paddingVertical="4dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/round_filled"/>
+
+        <TextView
+            android:id="@+id/purpose_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hobbies"
+            android:textColor="@color/netclan"
+            android:textSize="15sp"
+            android:paddingStart="7dp"
+            android:paddingEnd="12dp"
+            android:paddingVertical="4dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/round_stroked"/>
+
+        <TextView
+            android:id="@+id/purpose_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Friendship"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:paddingStart="7dp"
+            android:paddingEnd="12dp"
+            android:paddingVertical="4dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/round_filled"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="22dp">
+
+        <TextView
+            android:id="@+id/purpose_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Movies"
+            android:textColor="@color/netclan"
+            android:textSize="15sp"
+            android:paddingStart="7dp"
+            android:paddingEnd="12dp"
+            android:paddingVertical="4dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/round_stroked"/>
+
+        <TextView
+            android:id="@+id/purpose_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dinning"
+            android:textColor="@color/netclan"
+            android:textSize="15sp"
+            android:paddingStart="7dp"
+            android:paddingEnd="12dp"
+            android:paddingVertical="4dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/round_stroked"/>
+
+        <TextView
+            android:id="@+id/purpose_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dating"
+            android:textColor="@color/netclan"
+            android:textSize="15sp"
+            android:paddingStart="7dp"
+            android:paddingEnd="12dp"
+            android:paddingVertical="4dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/round_stroked"/>
+
+        <TextView
+            android:id="@+id/purpose_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Matrimony"
+            android:textColor="@color/netclan"
+            android:textSize="15sp"
+            android:paddingStart="7dp"
+            android:paddingEnd="12dp"
+            android:paddingVertical="4dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/round_stroked"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/refine_button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="28dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingHorizontal="60dp"
+        android:text="@string/tv_save_and_explore"
+        android:textSize="15sp"
+        android:backgroundTint="@color/netclan_dark"/>
+
+</LinearLayout>

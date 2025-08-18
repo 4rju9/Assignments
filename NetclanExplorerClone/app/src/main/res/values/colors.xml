@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_2">#A6D3D3D3</color>
+    <color name="white_3">#C1B4B4</color>
+    <color name="white_4">#B3FFFFFF</color>
+    <color name="deep_sky_blue">#00BEF7</color>
+    <color name="netclan">#FF133D59</color>
+    <color name="yellow">#FFF9CE12</color>
+    <color name="netclan_dark">#0D2637</color>
+    <color name="netclan_gray">#FF718B9B</color>
+    <color name="status_bar_color">#0E2E43</color>
+</resources>

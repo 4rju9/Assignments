@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Netclan Explorer Clone</string>
+    <string name="tv_howdy">Howdy</string>
+    <string name="tv_exclamation">!!</string>
+    <string name="tv_unknown">Unknown</string>
+    <string name="tv_name">FName LName</string>
+    <string name="tv_uname">ARRUDRkddkwl8</string>
+    <string name="status">Available</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_network">My Network</string>
+    <string name="switch_business">Switch to Business</string>
+    <string name="switch_merchant">Switch to Merchant</string>
+    <string name="dating">Dating</string>
+    <string name="matrimony">Matrimony</string>
+    <string name="buy_sell_rent">Buy-Sell-Rent</string>
+    <string name="jobs">Jobs</string>
+    <string name="business_cards">Business Cards</string>
+    <string name="netclan_groups">Netclan Groups</string>
+    <string name="notes">Notes</string>
+    <string name="live_locations">Live Locations</string>
+    <string name="explore">Explore</string>
+    <string name="network">Network</string>
+    <string name="chat">Chat</string>
+    <string name="contacts">Contacts</string>
+    <string name="groups">Groups</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="button_desc">Buttons</string>
+    <string name="tv_select_availability">Select Your Availability</string>
+    <string name="tv_select_status">Add Your Status</string>
+    <string name="tv_select_distance">Select Hyper local Distance</string>
+    <string name="tv_select_purpose">Select Purpose</string>
+    <string name="tv_save_and_explore">Save &amp; Explore</string>
+    <string name="tv_initial_status">Hi community! I am open to new connections \"😊\"</string>
+    <string name="from_distance">1 km</string>
+    <string name="to_distance">100 km</string>
+    <string name="tv_refine">Refine</string>
+
+    <string-array name="availability_array">
+        <item>Available | Hey Let Us Connect</item>
+        <item>Away | Stay Discrete And Watch</item>
+        <item>Busy | Do Not Disturb | Will Catch Up Later</item>
+        <item>SOS | Emergency! need Assistance! HELP</item>
+    </string-array>
+
+    <string name="slash">/</string>
+    <string name="tv_two_fifty">250</string>
+    <string name="tv_personal">Personal</string>
+    <string name="tv_business">Business</string>
+    <string name="tv_merchant">Merchant</string>
+    <string name="tv_initial_status_2">Hi community! I am available at your service!</string>
+    <string name="tv_search">Search</string>
+    <string name="tv_explore_list">Your explore list is</string>
+    <string name="tv_empty">EMPTY</string>
+    <string name="increase_radius">increase radius</string>
+    <string name="tv_sorry_we_couldn_t">Sorry, we couldn\'t find any users near you.</string>
+    <string name="tv_increasing_radius">Try increasing your search radius.</string>
+
+</resources>
