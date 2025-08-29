@@ -2,6 +2,7 @@ package app.netlify.dev4rju9.taskmanager.view.screens.listscreen
 
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -96,20 +97,21 @@ fun TaskItem (
             .cardElevation(8.dp),
         onClick = {
             onItemClicked(task)
-        },
-        colors = CardDefaults.cardColors(
-            containerColor = if (task.isCompleted) Color.Green.copy(0.5f) else Color.Red.copy(0.5f),
-        )
+        }
     ) {
         Column (
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
+            modifier = Modifier
+                .background(if (task.isCompleted) Color.Green.copy(0.5f) else Color.Red.copy(0.5f))
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
 
             Text(
                 text = task.title,
                 style = MaterialTheme.typography.headlineMedium,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -119,7 +121,8 @@ fun TaskItem (
                     text = task.description,
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 5,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -134,7 +137,8 @@ fun TaskItem (
 
                 Text(
                     text = getTime(task.date),
-                    style = MaterialTheme.typography.bodySmall
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 IconButton (
@@ -144,7 +148,7 @@ fun TaskItem (
                         imageVector = Icons.Default.Delete,
                         contentDescription = "Delete Task",
                         modifier = Modifier.size(20.dp),
-                        tint = MaterialTheme.colorScheme.primary
+                        tint = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }

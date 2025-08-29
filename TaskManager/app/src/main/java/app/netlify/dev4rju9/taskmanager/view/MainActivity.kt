@@ -87,7 +87,12 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             modifier = Modifier.fillMaxWidth(),
-                            title = { Text(text = "List Screen", textAlign = TextAlign.Center) }
+                            title = {
+                                Text(
+                                    text = if (currentRoute == "list_screen") "Task Manager" else "Add Task",
+                                    textAlign = TextAlign.Center
+                                )
+                            }
                         )
                     },
                     floatingActionButton = {
