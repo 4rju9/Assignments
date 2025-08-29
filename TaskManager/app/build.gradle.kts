@@ -61,10 +61,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // Dagger Hilt
+    // Dagger Hilt + Jetpack Compose
     implementation(libs.dagger.hilt)
-    implementation(libs.dagger.navigation.compose)
     ksp(libs.dagger.compiler)
+    implementation(libs.dagger.navigation.compose)
+    implementation(libs.work.hilt)
+    ksp(libs.work.compiler)
 
     // Room Database
     implementation(libs.room.runtime)

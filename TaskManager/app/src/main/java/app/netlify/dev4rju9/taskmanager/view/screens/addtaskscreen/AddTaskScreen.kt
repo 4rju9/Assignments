@@ -1,21 +1,23 @@
 package app.netlify.dev4rju9.taskmanager.view.screens.addtaskscreen
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.DatePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimePicker
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -81,10 +83,13 @@ fun AddTaskScreen (
         )
 
         if (showTimePicker) {
-            DialExample(
+            DateTimePicker(
                 onConfirm = {
                     viewModel.updateTime(it)
                     showTimePicker = false
+                    if (state.title.isNotEmpty()) {
+                        viewModel.addTask(context)
+                    }
                 },
                 onDismiss = { showTimePicker = false }
             )
@@ -103,62 +108,71 @@ fun AddTaskScreen (
             }
         }
 
-        TextButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            enabled = state.title.isNotEmpty(),
-            shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
-            onClick = {
-                viewModel.addTask(context)
-            }
-        ) {
-            Text(text = "Add Task")
-        }
-
     }
 
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DialExample(
+fun DateTimePicker(
     onConfirm: (Long) -> Unit,
-    onDismiss: () -> Unit,
+    onDismiss: () -> Unit
 ) {
-    val originalTime = Calendar.getInstance()
-    originalTime.set(Calendar.SECOND, 0)
-    originalTime.set(Calendar.MILLISECOND, 0)
-    val currentTime = Calendar.getInstance()
-    currentTime.set(Calendar.SECOND, 0)
-    currentTime.set(Calendar.MILLISECOND, 0)
+    val calendar = remember { Calendar.getInstance() }
+    val originalHour = calendar.get(Calendar.HOUR_OF_DAY)
+    val originalMinute = calendar.get(Calendar.MINUTE)
 
-    val timePickerState = rememberTimePickerState(
-        initialHour = currentTime.get(Calendar.HOUR_OF_DAY),
-        initialMinute = currentTime.get(Calendar.MINUTE),
-        is24Hour = true,
-    )
+    var showDatePicker by remember { mutableStateOf(true) }
+    var showTimePicker by remember { mutableStateOf(false) }
 
-    Column {
+    if (showDatePicker) {
+        val datePickerState = rememberDatePickerState(
+            initialSelectedDateMillis = calendar.timeInMillis
+        )
+        DatePicker(state = datePickerState)
+
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Button(onClick = onDismiss) { Text("Cancel") }
+            Button(onClick = {
+                val selectedDate = datePickerState.selectedDateMillis ?: calendar.timeInMillis
+                calendar.timeInMillis = selectedDate
+                calendar.set(Calendar.HOUR_OF_DAY, originalHour)
+                calendar.set(Calendar.MINUTE, originalMinute)
+                showDatePicker = false
+                showTimePicker = true
+            }) { Text("Next") }
+        }
+    }
+
+    if (showTimePicker) {
+
+        val timePickerState = rememberTimePickerState(
+            initialHour = originalHour % 12,
+            initialMinute = originalMinute,
+            is24Hour = false
+        )
+
         TimePicker(state = timePickerState)
 
-        Button(onClick = onDismiss) {
-            Text("Dismiss picker")
-        }
-
-        Button(onClick = {
-            val hour = timePickerState.hour - originalTime.get(Calendar.HOUR_OF_DAY)
-            val minute = timePickerState.minute - originalTime.get(Calendar.MINUTE)
-            if (hour > 0) currentTime.add(Calendar.HOUR_OF_DAY, hour) else {
-                Log.d("x4rju9", "hour: $hour")
-            }
-            if (minute > 0) currentTime.add(Calendar.MINUTE, minute) else {
-                Log.d("x4rju9", "minute: $minute")
-            }
-            onConfirm(currentTime.timeInMillis)
-        }) {
-            Text("Confirm selection")
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Button(onClick = { showTimePicker = false; showDatePicker = true }) { Text("Back") }
+            Button(onClick = {
+                calendar.set(Calendar.HOUR_OF_DAY, timePickerState.hour)
+                calendar.set(Calendar.MINUTE, timePickerState.minute)
+                calendar.set(Calendar.SECOND, 0)
+                calendar.set(Calendar.MILLISECOND, 0)
+                onConfirm(calendar.timeInMillis)
+            }) { Text("Confirm") }
         }
     }
 }

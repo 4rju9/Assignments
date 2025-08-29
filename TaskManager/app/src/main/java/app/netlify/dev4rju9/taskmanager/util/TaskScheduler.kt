@@ -2,19 +2,22 @@ package app.netlify.dev4rju9.taskmanager.util
 
 import android.content.Context
 import android.util.Log
-import androidx.room.Room
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import app.netlify.dev4rju9.taskmanager.model.repository.local.TaskDatabase
+import app.netlify.dev4rju9.taskmanager.model.repository.Repository
 import app.netlify.dev4rju9.taskmanager.util.Utility.createNotification
 import app.netlify.dev4rju9.taskmanager.util.Utility.getNotificationManager
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlin.random.Random
 
-
-class TaskScheduler(
-    val context: Context,
-    workerParams: WorkerParameters
-) : CoroutineWorker (context, workerParams) {
+@HiltWorker
+class TaskScheduler @AssistedInject constructor(
+    @Assisted val context: Context,
+    @Assisted workerParams: WorkerParameters,
+    private val repository: Repository
+) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
 
@@ -35,15 +38,8 @@ class TaskScheduler(
         )
 
         try {
-            val dao = Room.databaseBuilder(
-                context,
-                TaskDatabase::class.java,
-                "task_database"
-            )
-                .fallbackToDestructiveMigration()
-                .build().getDao()
-            val task = dao.getTask(task_id).copy(isCompleted = true)
-            dao.addTask(task)
+            val task = repository.getTask(task_id).copy(isCompleted = true)
+            repository.addTask(task)
             return Result.success()
         } catch (e: Exception) {
             Log.d("x4rju9", "doWork: ${e.message}")
