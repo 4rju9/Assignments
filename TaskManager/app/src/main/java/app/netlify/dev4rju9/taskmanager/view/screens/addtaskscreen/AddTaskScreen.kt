@@ -5,10 +5,14 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -43,6 +47,7 @@ fun AddTaskScreen (
     val state = viewModel.state.value
     val context = LocalContext.current
     var showTimePicker by remember { mutableStateOf(false) }
+    val scrollState = rememberScrollState()
 
     LaunchedEffect (state.message) {
         if (state.message.isNotBlank()) {
@@ -56,8 +61,16 @@ fun AddTaskScreen (
         }
     }
 
+    LaunchedEffect (showTimePicker) {
+        if (showTimePicker) {
+            scrollState.animateScrollTo(scrollState.maxValue)
+        }
+    }
+
     Column (
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -69,7 +82,8 @@ fun AddTaskScreen (
             value = state.title,
             shape = RoundedCornerShape(16.dp),
             onValueChange = { viewModel.updateTitle(it) },
-            label = { Text(text = "Title") }
+            label = { Text(text = "Title") },
+            maxLines = 1
         )
 
         OutlinedTextField(
@@ -79,7 +93,8 @@ fun AddTaskScreen (
             value = state.description,
             shape = RoundedCornerShape(16.dp),
             onValueChange = { viewModel.updateDescription(it) },
-            label = { Text(text = "Description") }
+            label = { Text(text = "Description") },
+            minLines = 3
         )
 
         if (showTimePicker) {
@@ -135,7 +150,7 @@ fun DateTimePicker(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(horizontal = 20.dp)
         ) {
             Button(onClick = onDismiss) { Text("Cancel") }
             Button(onClick = {
@@ -143,6 +158,8 @@ fun DateTimePicker(
                 calendar.timeInMillis = selectedDate
                 calendar.set(Calendar.HOUR_OF_DAY, originalHour)
                 calendar.set(Calendar.MINUTE, originalMinute)
+                calendar.set(Calendar.SECOND, 0)
+                calendar.set(Calendar.MILLISECOND, 0)
                 showDatePicker = false
                 showTimePicker = true
             }) { Text("Next") }
@@ -163,16 +180,17 @@ fun DateTimePicker(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(horizontal = 20.dp)
         ) {
             Button(onClick = { showTimePicker = false; showDatePicker = true }) { Text("Back") }
             Button(onClick = {
                 calendar.set(Calendar.HOUR_OF_DAY, timePickerState.hour)
                 calendar.set(Calendar.MINUTE, timePickerState.minute)
-                calendar.set(Calendar.SECOND, 0)
-                calendar.set(Calendar.MILLISECOND, 0)
                 onConfirm(calendar.timeInMillis)
             }) { Text("Confirm") }
         }
     }
+
+    Spacer(modifier = Modifier.height(20.dp))
+
 }

@@ -37,7 +37,7 @@ class ListViewModel @Inject constructor(
             _state.value = _state.value.copy(isLoading = true)
             repository.getTasks().collectLatest {
                 Log.d("x4rju9", "loadTask: ${it.size}\n$it")
-                _state.value = _state.value.copy(tasks = it, isLoading = false)
+                _state.value = _state.value.copy(tasks = it.sortedBy { task -> task.date }, isLoading = false)
             }
         }
     }
