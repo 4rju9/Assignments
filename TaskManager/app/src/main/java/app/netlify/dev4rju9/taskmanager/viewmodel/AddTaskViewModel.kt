@@ -4,8 +4,11 @@ import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.BackoffPolicy
+import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
@@ -21,11 +24,30 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddTaskViewModel @Inject constructor(
-    private val repository: Repository
+    private val repository: Repository,
+    private val bundle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state = mutableStateOf(AddTaskState())
     val state: State<AddTaskState> = _state
+
+    init {
+        viewModelScope.launch {
+            bundle.get<Long>("taskId")?.also { taskId ->
+                if (taskId != -1L) {
+                    try {
+                        val task = repository.getTask(taskId)
+                        _state.value = _state.value.copy(
+                            id = task.id,
+                            title = task.title,
+                            description = task.description,
+                            date = task.date
+                        )
+                    } catch (e: Exception) { Log.d("x4rju9", "Couldn't find task with $taskId") }
+                }
+            }
+        }
+    }
 
     fun updateTitle(title: String) {
         _state.value = _state.value.copy(title = title)
@@ -79,14 +101,22 @@ class AddTaskViewModel @Inject constructor(
                     TimeUnit.MILLISECONDS
                 )
                 .setInputData(inputData)
+                .setBackoffCriteria(
+                    BackoffPolicy.EXPONENTIAL,
+                    10,
+                    TimeUnit.SECONDS
+                )
                 .build()
 
-            WorkManager.getInstance(context)
-                .enqueue(request)
+            WorkManager.getInstance(context).apply {
+                enqueueUniqueWork(
+                    "task_${task.id}",
+                    ExistingWorkPolicy.REPLACE,
+                    request
+                )
+            }
 
-            task = task.copy(work_id = request.id)
-
-            repository.addTask(task)
+            repository.addTask(task.copy(work_id = request.id))
 
             updateMessage("Task added successfully")
             updateSaved(true)

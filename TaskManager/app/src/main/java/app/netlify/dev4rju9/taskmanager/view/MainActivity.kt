@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
@@ -33,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -40,7 +43,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import app.netlify.dev4rju9.taskmanager.view.screens.addtaskscreen.AddTaskScreen
 import app.netlify.dev4rju9.taskmanager.view.screens.listscreen.ListScreen
 import app.netlify.dev4rju9.taskmanager.view.ui.theme.TaskManagerTheme
@@ -66,7 +71,7 @@ class MainActivity : ComponentActivity() {
             TaskManagerTheme {
 
                 val navController = rememberNavController()
-                var selectedIndex by remember { mutableIntStateOf(0) }
+                val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
                 LaunchedEffect(true) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -85,30 +90,20 @@ class MainActivity : ComponentActivity() {
                             title = { Text(text = "List Screen", textAlign = TextAlign.Center) }
                         )
                     },
-                    bottomBar = {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                Icons.Default.Home,
-                                contentDescription = "List Screen",
-                                tint = if (selectedIndex == 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground,
-                                modifier = Modifier.size(50.dp)
-                                    .clickable {
-                                        selectedIndex = 0
-                                        navController.navigate("list_screen")
-                                    }
-                            )
+                    floatingActionButton = {
+                        if (currentRoute == "list_screen") {
                             Icon(
                                 Icons.Default.Add,
                                 contentDescription = "Add Task",
-                                tint = if (selectedIndex == 1) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground,
+                                tint = MaterialTheme.colorScheme.onPrimary,
                                 modifier = Modifier.size(50.dp)
+                                    .background(MaterialTheme.colorScheme.primary, shape = CircleShape)
                                     .clickable {
-                                        selectedIndex = 1
-                                        navController.navigate("add_task_screen")
+                                        navController.navigate("add_task_screen") {
+                                            popUpTo("add_task_screen") {
+                                                inclusive = true
+                                            }
+                                        }
                                     }
                             )
                         }
@@ -120,15 +115,25 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(paddingValues)
                     ) {
                         composable("list_screen") {
-                            ListScreen()
-                        }
-                        composable("add_task_screen") {
-                            AddTaskScreen {
-                                navController.navigate("list_screen") {
-                                    popUpTo("list_screen") {
+                            ListScreen {
+                                navController.navigate("add_task_screen" + "?taskId=${it.date}") {
+                                    popUpTo("add_task_screen") {
                                         inclusive = true
                                     }
                                 }
+                            }
+                        }
+                        composable(
+                            "add_task_screen" + "?taskId={taskId}",
+                            arguments = listOf(
+                                navArgument("taskId") {
+                                    type = androidx.navigation.NavType.LongType
+                                    defaultValue = -1L
+                                }
+                            )
+                        ) {
+                            AddTaskScreen {
+                                navController.navigateUp()
                             }
                         }
                     }

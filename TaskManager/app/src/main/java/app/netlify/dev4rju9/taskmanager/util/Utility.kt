@@ -49,7 +49,7 @@ object Utility {
 
     fun getTime (time: Long) : String {
         val date = Date(time)
-        val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val formatter = SimpleDateFormat("dd MMM, yyyy h:mm a", Locale.getDefault())
         return formatter.format(date)
     }
 
