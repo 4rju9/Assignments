@@ -1,6 +1,7 @@
 package app.netlify.dev4rju9.clickretinaassignment.presentation.UserProfileScreen
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.Canvas
@@ -12,12 +13,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -45,6 +48,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -74,6 +78,8 @@ fun UserProfileScreen (
     )
     val scope = rememberCoroutineScope()
     val tabs = listOf("0 shots", "10 Collections")
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val backgroundHeight = screenWidth * 9 / 22
 
     Column (
         modifier = modifier
@@ -103,17 +109,18 @@ fun UserProfileScreen (
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.background)
-                    .padding(bottom = 70.dp)
+                    .background(Color.White)
+                    .padding(top = 0.dp, bottom = 70.dp)
             ) {
 
                 Image(
                     painterResource(id = R.drawable.background),
                     contentDescription = "Background",
                     modifier = Modifier
-                        .fillMaxWidth()
                         .align(Alignment.TopCenter)
-                        .scale(scaleY = 1.2f, scaleX = 1f)
+                        .width(screenWidth)
+                        .height(backgroundHeight)
+                        .scale(scaleX = 1.1f, scaleY = 1.1f)
                 )
 
                 IconButton(
@@ -141,7 +148,7 @@ fun UserProfileScreen (
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .size(100.dp)
-                        .offset(y = 60.dp)
+                        .offset(y = backgroundHeight / 3)
                         .clip(CircleShape)
                         .border(4.dp, Color.White, CircleShape),
                     contentScale = ContentScale.Crop
