@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:paddingVertical="45dp"
+    android:paddingHorizontal="20dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/dateView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:textSize="30sp"
+        android:textColor="@color/bg_dark"
+        android:fontFamily="@font/varent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="16dp"
+        android:dividerHeight="10dp"
+        android:divider="@null"
+        android:scrollbars="horizontal"
+        android:scrollbarThumbHorizontal="@color/bg_dark"
+        tools:listitem="@layout/all_article_sinle_item"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_all_articles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/transparent"
+        android:drawableRight="@drawable/arrow_right_black_icon"
+        android:drawablePadding="20dp"
+        android:text="@string/all_articles"
+        android:textColor="@color/bg_dark"
+        android:fontFamily="@font/grotesk"
+        android:textAllCaps="false" />
+
+</LinearLayout>

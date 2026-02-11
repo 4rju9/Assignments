@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark"
+    android:paddingBottom="30dp"
+    tools:context=".fragments.TodaySpecialArtical">
+
+    <ImageView
+        android:id="@+id/specialImageView"
+        android:layout_width="match_parent"
+        android:layout_height="275dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingVertical="32dp"
+        android:paddingHorizontal="20dp"
+        android:background="@color/bg_dark"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/specialSubText"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/grotesk"/>
+
+        <TextView
+            android:id="@+id/specialTitle"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="15dp"
+            android:textSize="36sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/marisa"/>
+
+        <TextView
+            android:id="@+id/specialText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/brown"/>
+        
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/save_icon"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>
